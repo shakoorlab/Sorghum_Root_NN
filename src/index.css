@@ -1,0 +1,86 @@
+:root {
+  font-family: Avenir;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: block;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+/* --------------------- */
+.navbar-container {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays on top of other content */
+}
+/* --------------------- */
+/* //! rename this below */
+.content-wrapper {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Align children to start from the top */
+  align-items: center; /* Center children horizontally */
+  height: calc(100vh - 56px); /* Adjust the height to account for the navbar */
+  margin-top: 56px; /* Push content down by the navbar's height */
+  padding: 20px; /* Maintain padding */
+  box-sizing: border-box; /* Include padding in the element's total height and width */
+  width: 100%; /* Ensure it spans the full width */
+}
+
+.grid-container {
+  display: flex;
+  width: 100%;
+  height: 90%;
+  align-items: flex-start; /* Align items to the top */
+  justify-content: center; /* This will still center the items horizontally */
+}
+
+.left-box-container {
+  display: flex;
+  flex-direction: column; /* Stack the left-box and bottom-left-box vertically */
+}
+
+.left-box {
+  width: 75%; /* Ensure both boxes have the same width */
+  margin-right: 10rem; /* Adjust spacing as needed */
+  border-bottom: 1px solid #797979; /* Example styling */
+}
+
+.bottom-left-box {
+  margin-top: 20px; /* Spacing between the left-box and the bottom-left-box */
+}
+
+.right-box {
+  width: 35%;
+  border: 2px solid #797979;
+  border-radius: 10px;
+  background-color: #f6f2f2;
+  display: flex; /* Make right-box a flex container */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 80%; /* Ensure it takes full height of its parent */
+  cursor: pointer;
+}
+
+.add-image {
+  /* Optional: Add specific dimensions for the image or max-width/max-height to maintain aspect ratio */
+  max-width: 100%;
+  max-height: 100%;
+  /* This ensures the image is responsive and stays within the bounds of the .right-box */
+}
+/* --------------------- */
