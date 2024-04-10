@@ -45,7 +45,7 @@ body {
 .grid-container {
   display: flex;
   width: 100%;
-  height: 90%;
+  height: 100%;
   align-items: flex-start; /* Align items to the top */
   justify-content: center; /* This will still center the items horizontally */
 }
@@ -64,23 +64,95 @@ body {
 .bottom-left-box {
   margin-top: 20px; /* Spacing between the left-box and the bottom-left-box */
 }
+.right-box-container {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  width: 50%;
+  height: 80%;
+}
 
 .right-box {
-  width: 35%;
+  width: 100%;
   border: 2px solid #797979;
-  border-radius: 10px;
   background-color: #f6f2f2;
   display: flex; /* Make right-box a flex container */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  height: 80%; /* Ensure it takes full height of its parent */
+  height: 200%; /* Ensure it takes full height of its parent */
   cursor: pointer;
+  flex-direction: column;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.right-box.drag-over {
+  border-color: #000; /* Change as desired */
+  /* Additional styling to indicate drag over state */
+}
+
+.right-box h2 {
+  color: #000; /* Example color, adjust as needed */
+  text-align: center;
+  margin-top: 20px; /* Adds some space between the image and the text */
+  font-size: 1.3rem; /* Adjust the size as needed */
+  font-weight: bold;
+}
+.right-box h3 {
+  color: #000; /* Example color, adjust as needed */
+  text-align: center;
+  margin-top: 5px; /* Adds some space between the image and the text */
+  font-size: 0.95rem; /* Adjust the size as needed */
 }
 
 .add-image {
-  /* Optional: Add specific dimensions for the image or max-width/max-height to maintain aspect ratio */
   max-width: 100%;
   max-height: 100%;
-  /* This ensures the image is responsive and stays within the bounds of the .right-box */
+  border-radius: 5px;
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
 }
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  gap: 20px; /* Space between the two buttons */
+}
+.generate-mask-btn,
+.delete-btn {
+  display: block; /* Ensure it's block-level for margin to work as expected */
+  width: max-content; /* Adjust width to content or set a specific width */
+  margin: 20px auto; /* Top margin and horizontally centered */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border-radius: 10px; /* Rounded corners */
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.generate-mask-btn {
+  background-color: #baffba; /* Slightly darker green on hover */
+  border-color: #008000; /* Darker green border on hover */
+  color: #008000; /* Darker green border on hover */
+}
+.generate-mask-btn:hover {
+  background-color: #89f589; /* Slightly darker green on hover */
+  border-color: #008000; /* Darker green border on hover */
+  color: #023a02;
+}
+
+.delete-btn {
+  background-color: #ffcccc; /* Light red background for delete */
+  border-color: red;
+  color: red;
+}
+
+.delete-btn:hover {
+  background-color: #ff9999; /* Darker red on hover */
+  border-color: darkred;
+  color: darkred;
+}
+
 /* --------------------- */
