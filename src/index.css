@@ -118,7 +118,7 @@ body {
   gap: 20px; /* Space between the two buttons */
 }
 .generate-mask-btn,
-.delete-btn {
+.reset-btn {
   display: block; /* Ensure it's block-level for margin to work as expected */
   width: max-content; /* Adjust width to content or set a specific width */
   margin: 20px auto; /* Top margin and horizontally centered */
@@ -143,13 +143,13 @@ body {
   color: #023a02;
 }
 
-.delete-btn {
+.reset-btn {
   background-color: #ffcccc; /* Light red background for delete */
   border-color: red;
   color: red;
 }
 
-.delete-btn:hover {
+.reset-btn:hover {
   background-color: #ff9999; /* Darker red on hover */
   border-color: darkred;
   color: darkred;
