@@ -7,11 +7,12 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
+import MaskResults from "./components/MaskResults";
 
 function App() {
-  const [imageSrc, setImageSrc] = useState("src/assets/add-image1.png");
-  // New state to track if a user has selected an image
-  const [isImageSelected, setIsImageSelected] = useState(false);
+  const [imageSrc, setImageSrc] = useState("src/assets/add-image1.png"); //used for template image
+  const [isImageSelected, setIsImageSelected] = useState(false); //  state to track if a user has selected an image
+  const [imageFile, setImageFile] = useState(null); // state to hold the file object
 
   function handleFileChange(event) {
     const files = event.target.files;
@@ -20,9 +21,11 @@ function App() {
       const newImageSrc = URL.createObjectURL(file);
       setImageSrc(newImageSrc);
       setIsImageSelected(true); // Indicate that an image has been selected
+      setImageFile(file); // Store the file object
     }
   }
 
+  //*----------------------------SEARCH FILE SYSTEM/DRAG-DROP CAPABILITIES---------------------
   function handleDrop(e) {
     e.preventDefault(); // Prevent default behavior (Prevent file from being opened)
 
@@ -49,9 +52,45 @@ function App() {
     // Pass event to handleFileChange for further processing
     handleFileChange({ target: { files: e.dataTransfer.files } });
   }
+  //*--------------------------------------------------------------------------------------------------
+  //
+  //
+  //?--------------------FOR SUBMITTING PICTURES TO BACKEND---------------------------------------------
+  async function handleSubmit() {
+    if (!imageFile) return; // Check if file is not selected
 
+    const formData = new FormData();
+    formData.append("image", imageFile); // Append file to form data under the key 'image'
+
+    // const token = "";
+    // Encode your username and password
+    const username = "";
+    const password = "";
+    const encodedCredentials = btoa(`${username}:${password}`);
+
+    try {
+      const response = await fetch(
+        "http://3.15.232.18:8000/api/datasets/1/images/",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${encodedCredentials}`,
+          },
+          body: formData,
+        }
+      );
+
+      if (!response.ok) throw new Error("Network response was not ok.");
+
+      const data = await response.json();
+      console.log(data); // Process the response data as needed
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+  //?---------------------------------------------------------------------------------------------------
   return (
-    //* component used from react bootstrap website*/
+    //* component used from https://react-bootstrap.netlify.app/docs/components/navbar/ */
     <>
       {/* navbar start */}
       <div className="navbar-container">
@@ -112,7 +151,8 @@ function App() {
               <h1>Analyze Root Architecture</h1>
             </div>
             <div className="bottom-left-box">
-              <p>Detect the roots present in your photo</p>
+              {/* <p>Detect the roots present in your photo</p> */}
+              <MaskResults />
             </div>
           </div>
           <div className="right-box-container">
@@ -145,8 +185,10 @@ function App() {
             </div>
             {isImageSelected && (
               <div className="button-container">
-                <button className="generate-mask-btn">Generate Mask</button>
-                <button className="delete-btn">Delete</button>
+                <button className="generate-mask-btn" onClick={handleSubmit}>
+                  Generate Mask
+                </button>
+                <button className="reset-btn">Reset</button>
               </div>
             )}
           </div>
