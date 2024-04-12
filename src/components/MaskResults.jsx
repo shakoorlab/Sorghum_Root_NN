@@ -9,6 +9,45 @@ function MaskResults() {
     total_root_area: 4,
     total_root_volume: 5,
   };
+  const data = {
+    id: 0,
+    picture: 0,
+    threshold: 0,
+    created: "2024-04-12T16:52:58.455Z",
+    updated: "2024-04-12T16:52:58.455Z",
+    root_count: 1,
+    average_root_diameter: 2,
+    total_root_length: 3,
+    total_root_area: 4,
+    total_root_volume: 5,
+  };
+
+  const convertToCSV = (objArray) => {
+    const array = [objArray];
+    const csv = array.map((row) =>
+      Object.keys(row)
+        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+        .join(",")
+    );
+    csv.unshift(Object.keys(objArray).join(",")); // Add header row
+    return csv.join("\r\n");
+
+    function replacer(key, value) {
+      return value === null ? "" : value; // Replace null with empty string in CSV output
+    }
+  };
+
+  const downloadCSV = () => {
+    const csvData = convertToCSV(data);
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "data.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <>
@@ -56,6 +95,7 @@ function MaskResults() {
           e.target.style.backgroundColor = "#baffba";
           e.target.style.color = "#008000";
         }}
+        onClick={downloadCSV}
       >
         Download CSV
       </button>
