@@ -83,47 +83,51 @@ body {
   cursor: pointer;
   flex-direction: column;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .right-box.drag-over {
   border-color: #000; /* Change as desired */
-  /* Additional styling to indicate drag over state */
 }
 
 .right-box h2 {
-  color: #000; /* Example color, adjust as needed */
+  color: #000;
   text-align: center;
   margin-top: 20px; /* Adds some space between the image and the text */
-  font-size: 1.3rem; /* Adjust the size as needed */
+  font-size: 1.3rem;
   font-weight: bold;
 }
 .right-box h3 {
-  color: #000; /* Example color, adjust as needed */
+  color: #000;
   text-align: center;
   margin-top: 5px; /* Adds some space between the image and the text */
-  font-size: 0.95rem; /* Adjust the size as needed */
+  font-size: 0.95rem;
 }
 
 .add-image {
   max-width: 100%;
   max-height: 100%;
-  border-radius: 5px;
-  /* border-top-left-radius: 10px;
-  border-top-right-radius: 10px; */
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .button-container {
   display: flex;
   justify-content: center; /* Center the buttons horizontally */
-  gap: 20px; /* Space between the two buttons */
+  background-color: #f3f0f0;
+  width: 100%;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+  border: 2px solid #797979;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .generate-mask-btn,
 .reset-btn {
   display: block; /* Ensure it's block-level for margin to work as expected */
-  width: max-content; /* Adjust width to content or set a specific width */
-  margin: 20px auto; /* Top margin and horizontally centered */
-  padding: 10px 20px; /* Adjust padding as needed */
-  border-radius: 10px; /* Rounded corners */
+  width: max-content; /* had at 20% Adjust width to content or set a specific width */
+  margin: 20px 50px; /* Top margin and horizontally centered */
+  padding: 10px 20px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   font-weight: bold;
@@ -156,3 +160,14 @@ body {
 }
 
 /* --------------------- */
+
+@media (min-width: 1701px) {
+  .add-image {
+    border-radius: 0px;
+  }
+}
+@media (max-width: 1401px) {
+  .add-image {
+    border-radius: 0px;
+  }
+}
