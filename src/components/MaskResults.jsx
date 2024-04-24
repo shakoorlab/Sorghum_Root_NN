@@ -1,26 +1,21 @@
 import React from "react";
+import { useMaskData } from "../context/MaskDataContext.jsx";
 
 function MaskResults() {
-  // Mock data for display
-  const mockData = {
-    root_count: 1,
-    average_root_diameter: 2,
-    total_root_length: 3,
-    total_root_area: 4,
-    total_root_volume: 5,
-  };
-  const data = {
-    id: 0,
-    picture: 0,
-    threshold: 0,
-    created: "2024-04-12T16:52:58.455Z",
-    updated: "2024-04-12T16:52:58.455Z",
-    root_count: 1,
-    average_root_diameter: 2,
-    total_root_length: 3,
-    total_root_area: 4,
-    total_root_volume: 5,
-  };
+  const { maskData } = useMaskData(); // Access data from React context
+
+  // Log data types for troubleshooting
+  // console.log("Data types:", {
+  //   root_count: typeof maskData.root_count,
+  //   average_root_diameter: typeof maskData.average_root_diameter,
+  //   total_root_length: typeof maskData.total_root_length,
+  //   total_root_area: typeof maskData.total_root_area,
+  //   total_root_volume: typeof maskData.total_root_volume,
+  // });
+
+  if (!maskData || Object.keys(maskData).length === 0) {
+    return <p>No data available or still loading...</p>;
+  }
 
   const convertToCSV = (objArray) => {
     const array = [objArray];
@@ -38,12 +33,12 @@ function MaskResults() {
   };
 
   const downloadCSV = () => {
-    const csvData = convertToCSV(data);
+    const csvData = convertToCSV(maskData);
     const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", "data.csv");
+    link.setAttribute("download", "root_data.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -60,15 +55,29 @@ function MaskResults() {
         }}
       >
         <strong>Root Count:</strong>
-        <div>{mockData.root_count}</div>
-        <strong>Average Root Diameter:</strong>
-        <div>{mockData.average_root_diameter}</div>
-        <strong>Total Root Length:</strong>
-        <div>{mockData.total_root_length}</div>
-        <strong>Total Root Area:</strong>
-        <div>{mockData.total_root_area}</div>
-        <strong>Total Root Volume:</strong>
-        <div>{mockData.total_root_volume}</div>
+        <div>{maskData.root_count ? `${maskData.root_count}` : "No data"}</div>
+        <strong>Average Root Diameter (mm):</strong>
+        <div>
+          {maskData.average_root_diameter
+            ? `${maskData.average_root_diameter}`
+            : "No data"}
+        </div>
+        <strong>Total Root Length (mm):</strong>
+        <div>
+          {maskData.total_root_length
+            ? `${maskData.total_root_length}`
+            : "No data"}
+        </div>
+        <strong>Total Root Area (mm):</strong>
+        <div>
+          {maskData.total_root_area ? `${maskData.total_root_area}` : "No data"}
+        </div>
+        <strong>Total Root Volume (mm):</strong>
+        <div>
+          {maskData.total_root_volume
+            ? `${maskData.total_root_volume}`
+            : "No data"}
+        </div>
       </div>
 
       <button
